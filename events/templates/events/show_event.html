@@ -1,0 +1,39 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+
+<div class="card">
+    <div class="card-header">
+        {{ event }}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ event.venue }}</h5>
+      <p class="card-text">
+        <ul>
+            <li>Event Date: {{ event.event_date }}</li>
+            <li>Days Till Event: {{event.Days_till}}</li>
+            <li>Website: {{ event.venue.web }}</li>
+            <li>Manager: {{ event.manager }}</li>
+            <li>Description: {{ event.description }}</li>
+            <li>Approved: {{ event.approved}}</li>
+            <li>Attendees : {% for user in event.attendees.all %}
+           {{ user }} <br/>
+           {% endfor%} 
+            </li>
+          </ul>
+          <br/>
+      </p>
+    </div>
+
+      {% if user == event.manager %}
+      <div class="card-footer text-muted">
+        <a href="{% url 'update-event' event.id %}" class="btn btn-outline-secondary btn-sm">Update Event</a>
+        <a href="{% url 'delete-event' event.id %}" class="btn btn-outline-danger btn-sm">Delete Event</a>
+      </div>
+      {% endif %}
+
+  </div>
+
+    
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+
+<h1>List Videos</h1>
+<ul>
+    {% for video in videos %}
+        <li>
+            <h3>{{ video.title }}</h3>
+            <video width="320" height="240" controls>
+                <source src="{{ video.video_file.url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
